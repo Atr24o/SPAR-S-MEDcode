@@ -73,8 +73,8 @@ Sinta-se à vontade para:
 ---
 
 ## 🩵 Feito com dedicação pela equipe **SPAR MEDcode**
--<a href="https://github.com/LoucuraGames">Gabriel Lucas</a> (Project Owner)
--<a href="https://github.com/vitorjoao1210">João Victor</a> (Scrum Master)
--<a href="https://github.com/Atr24o">Arthur Henrique</a>
--<a href="https://https://github.com/ellieminhamulher">Anna</a>
+- <a href="https://github.com/LoucuraGames">Gabriel Lucas</a> (Project Owner)
+- <a href="https://github.com/vitorjoao1210">João Victor</a> (Scrum Master)
+- <a href="https://github.com/Atr24o">Arthur Henrique</a>
+- <a href="https://https://github.com/ellieminhamulher">Anna</a>
 > “Agendar uma consulta nunca foi tão rápido!” 💫
