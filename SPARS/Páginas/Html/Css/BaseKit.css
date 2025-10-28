@@ -13,6 +13,17 @@
     color: black;
 }
 
+@font-face {
+    font-family: Hati;
+    src: url(Font/SetiaHati-Regular.ttf);
+}
+
+.Hati {
+    font-size: 80px;
+    font-family: Hati;
+    color: black;
+}
+
 /* HEADER */
 
 header {
