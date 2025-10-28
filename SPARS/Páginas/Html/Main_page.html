@@ -5,6 +5,7 @@
     <meta name="MEDcode" content="width=device-width, initial-scale=1.0">
     <title>SPAR</title>
     <link rel="stylesheet" href="Css/Main_page.css">
+    <link rel="stylesheet" href="Css/BaseKit.css">
     <link rel="icon" href="imagens/Logo.png" type="image/png">
     <script src="JavaScript/dark_mode.js"></script>
 </head>
@@ -25,13 +26,20 @@
         </h2>
         <p id="slogan">Cuidando da sua saúde com muito cuidado para o seu bem</p>
         <img src="Css/Font/Doutores.jpg" alt="imagem de médicos atendendo um paciente" id="Doutores">
-        <button class="paciente">
+
+            <!-- BOTÕES -->
+
+        <button class="paciente" onclick="window.location.href='Login.html?tipo=paciente'">
             <img src="imagens/Paciente.avif" alt="paciente_Icon"> Eu sou um paciente
         </button>
 
-        <button class="medico">
+
+        <button class="medico" onclick="window.location.href='Login.html?tipo=medico'">
             <img src="imagens/Médico.avif" alt="paciente_Icon"> Eu sou um médico
         </button>
+
+        <!-- BOLHAS DE EXPLICAÇÃO -->
+
         <section class="explanations">
             <div class="espace1">
                 <div class="grid_espace1">

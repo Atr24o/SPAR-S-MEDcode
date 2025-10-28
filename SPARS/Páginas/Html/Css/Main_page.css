@@ -13,21 +13,7 @@
     color: black;
 }
 
-    /* CSS */
 
-html{
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-body{
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
 
     /* MODO ESCURO */
 
@@ -72,25 +58,9 @@ body.dark-mode .cell img#dados {
     background: #333;
 }
 
-    /* HEADER */
-header {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    background: rgb(206, 255, 239);
-    width: 100%;
-    padding: 0.1px;
-}
-
-header img {
-    height: 50px;
-    width: auto;
-}
-
     /* SECTION 1 */
 
 .Entrada {
-    padding: 10px 20px;
     position: absolute;
     transform: translateX(-50%);
     top: 10%;
@@ -127,7 +97,6 @@ header img {
     margin: 10px;
     cursor: pointer;
     width: 300px;
-    background: white;
     border-radius: 40px;
     border: none;
     display: flex;
@@ -155,7 +124,6 @@ header img {
     margin: 10px;
     cursor: pointer;
     width: 300px;
-    background: white;
     border-radius: 40px;
     border: none;
     display: flex;
@@ -247,16 +215,16 @@ h2 {
 }
 
 .letra1{
-    font-size: 80px;
+    font-size: 60px;
 }
 
 .letra2{
-    font-size: 80px;
+    font-size: 60px;
 }
 
 .letra3{
-    font-size: 80px;
+    font-size: 60px;
 }
 .letra4{
-    font-size: 80px;
+    font-size: 60px;
 }
