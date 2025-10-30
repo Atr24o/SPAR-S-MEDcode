@@ -26,7 +26,7 @@
 
 /* HEADER */
 
-a{
+#Titulo{
     transform: translateX(-50);
     right: 50%;
     text-decoration: none;
