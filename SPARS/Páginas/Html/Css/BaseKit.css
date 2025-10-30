@@ -14,17 +14,27 @@
 }
 
 @font-face {
-    font-family: Hati;
-    src: url(Font/SetiaHati-Regular.ttf);
+    font-family: Monark;
+    src: url(Font/MONARK.otf);
 }
 
-.Hati {
+.Monark {
     font-size: 80px;
-    font-family: Hati;
+    font-family: Monark;
     color: black;
 }
 
 /* HEADER */
+
+a{
+    transform: translateX(-50);
+    right: 50%;
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: black;
+}
 
 header {
     justify-content: center;
