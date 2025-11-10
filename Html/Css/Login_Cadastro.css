@@ -1,0 +1,127 @@
+    /* VISUAL CONTEINER */
+
+.conteiner_1{
+    border-radius: 50px;
+    padding: 20px 30px;
+    position: absolute;
+    flex-direction: column;
+    top: 55%;
+    left: 50%;
+    background-color: rgb(206, 255, 239);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-50%) translateY(-50%);
+    overflow: hidden;
+}
+
+#tituloLogin{
+    font-family: hati;
+    font-size: 80px;
+    margin: 0;
+}
+
+.LOGIN{
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 10px;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+}
+
+input{
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    width: 200px;
+    border: none;
+    background: white;
+    position: relative;
+    transition: border 0.3s ease, transform 0.3s ease;
+ }
+
+input:focus {
+    transform: scale(1.2);
+    border: 2px solid transparent;
+    border-radius: 0;
+    outline: none;
+    animation: borderGlow 2s linear infinite;
+}
+
+@keyframes borderGlow {
+    0% {
+        border-image: linear-gradient(0deg, hsla(120, 100%, 50%, 0.8), transparent, transparent, transparent) 1;
+    }
+    25% {
+        border-image: linear-gradient(90deg, hsla(120, 100%, 50%, 0.2), transparent, transparent, transparent) 1;
+    }
+    50% {
+        border-image: linear-gradient(180deg, hsla(120, 100%, 50%, 0.8), transparent, transparent, transparent) 1;
+    }
+    75% {
+        border-image: linear-gradient(270deg, hsla(120, 100%, 50%, 0.2), transparent, transparent, transparent) 1;
+    }
+    100% {
+        border-image: linear-gradient(360deg, hsla(120, 100%, 50%, 0.8), transparent, transparent, transparent) 1;
+    }
+}
+
+
+
+#botaoEntrar{
+    background: rgb(207, 255, 239);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+#green_effect1{
+    filter: opacity(0.5);
+    transform: scale(1.3);
+    position: relative;
+    bottom: -50px;
+    right: -90px;
+    margin-top: -200px;
+    pointer-events: none;
+}
+
+#green_effect2{
+    filter: opacity(0.5);
+    transform: scale(1.3) scaleY(-1) scaleX(-1);
+    position: relative;
+    top: 0px;
+    right: 90px;
+    margin-top: -50px;
+    pointer-events: none;
+}
+
+/* MODO ESCURO PARA LOGIN */
+
+body.dark-mode .conteiner_1 {
+    background-color: #333;
+    filter: grayscale(100);
+}
+
+body.dark-mode .conteiner_1 button{
+    background-color: #333;
+    background-color: #555;
+    color: #fff;
+    border: 1px solid #666;
+}
+
+body.dark-mode input {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #666;
+}
+
+body.dark-mode label {
+    color: #fff;
+}
+
+
