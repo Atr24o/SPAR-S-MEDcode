@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="MEDcode" content="width=device-width, initial-scale=1.0">
+    <title>SPAR</title>
+    <link rel="stylesheet" href="Css/BaseKit.css">
+    <link rel="stylesheet" href="Css/Login_Cadastro.css">
+    <link rel="icon" href="imagens/Logo.png" type="image/png">
+    <script src="JavaScript/dark_mode.js"></script>
+    <script src="JavaScript/Cadastro.js"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
+        <a href="Main_page.html" id="Titulo">
+            <img src="imagens/Logo.png" alt="Imagem da logo do grupo">
+            <h1>SPAR</h1>
+        </a>
+    </header>
+    
+    <!-- SEÇÃO DE CONTEINER DO LOGIN -->
+
+    <section class="conteiner_1">
+    
+        <img src="imagens/green_effect.png" alt="efeito" id="green_effect2">
+    
+        <div class="LOGIN">
+        
+            <h2 id="tituloLogin">Cadastro</h2>
+            <p id="mensagemLogin">Por favor, isira seus dados para criar sua conta.</p>
+            
+            <label for="usuario">Email:</label>
+            <div class="input-container">
+            <input type="email" id="Email" placeholder="Digite seu Email">
+            </div>
+
+            <label for="usuario">Usuário:</label>
+            <div class="input-container">
+            <input type="text" id="usuario" placeholder="Digite seu usuário">
+            </div>
+            
+
+            <label for="senha">Senha:</label>
+            <div class="input-container">
+                <input type="password" id="senha" placeholder="Digite sua senha">
+                <button id="toggleSenha" type="button" aria-label="Alternar visibilidade da senha"><img src="imagens/olho_aberto.png" alt="olho_aberto"></button>
+            </div>
+
+            <label for="senha_C">Confirme sua senha:</label>
+            <div class="input-container">
+                <input type="password" id="senha" placeholder="Digite sua senha">
+                <button id="toggleSenha" type="button" aria-label="Alternar visibilidade da senha"><img src="imagens/olho_aberto.png" alt="olho_aberto"></button>
+            </div>
+
+            <button id="botaoEntrar">Entrar</button>
+            
+            <a href="Login.html"><p>Já tenho uma conta</p></a>
+
+        </div>
+    
+        <img src="imagens/green_effect.png" alt="efeito" id="green_effect1">
+    
+    </section>
+
+    <img src="imagens/medico-com-os-bracos-cruzados.png" alt="medico-com-os-bracos-cruzados" id="bracos">
+
+</body>
+</html>
