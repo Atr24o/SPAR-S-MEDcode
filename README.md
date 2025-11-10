@@ -76,5 +76,5 @@ Sinta-se à vontade para:
 - <a href="https://github.com/Atr24o">Arthur Henrique</a>(Project Owner)
 - <a href="https://github.com/verstl0l">Victor Rodrigues</a> (Scrum Master)
 - <a href="https://github.com/LoucuraGames">Gabriel Lucas</a>
-
+- <a href="https://github.com/Caduccus">Jeferson Lira</a>
 > “Agendar uma consulta nunca foi tão rápido!” 💫
