@@ -1,83 +1,93 @@
     /* FONTES */
     
-@font-face {
-    font-family: WorkNews;
-    src: url(Font/WorkNews.ttf) format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-.WorkNews {
-    font-size: 80px;
-    font-family: WorkNews;
-    color: black;
-}
-
-@font-face {
-    font-family: Hati;
-    src: url(Font/SetiaHati-Regular.ttf);
-}
-
-.Hati {
-    font-size: 80px;
-    font-family: Hati;
-    color: black;
-}
-
-/* HEADER */
-
-header {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    background: rgb(206, 255, 239);
-    width: 100%;
-    padding: 0.1px;
-}
-
-header img {
-    height: 50px;
-    width: auto;
-}
-
-h1 {
-    font-family: WorkNews;
-}
-
-    /* CSS */
-
-html{
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-body{
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-    /* MODO ESCURO */
-
-.dark-mode-toggle {
-    position: absolute;
-    top: 20px; 
-    left: 10px; 
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.dark-mode header {
-    background: #333;
-}
+    @font-face {
+        font-family: WorkNews;
+        src: url(Font/WorkNews.ttf) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    .WorkNews {
+        font-size: 80px;
+        font-family: WorkNews;
+        color: black;
+    }
+    
+    @font-face {
+        font-family: Monark;
+        src: url(Font/MONARK.otf);
+    }
+    
+    .Monark {
+        font-size: 80px;
+        font-family: Monark;
+        color: black;
+    }
+    
+    /* HEADER */
+    
+    #Titulo{
+        transform: translateX(-50);
+        right: 50%;
+        text-decoration: none;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        color: black;
+    }
+    
+    header {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background: rgb(206, 255, 239);
+        width: 100%;
+        padding: 0.1px;
+    }
+    
+    header img {
+        height: 50px;
+        width: auto;
+    }
+    
+    h1 {
+        font-family: WorkNews;
+    }
+    
+        /* CSS */
+    
+    html{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    
+    body{
+        background-color: white;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+        /* MODO ESCURO */
+    
+    .dark-mode-toggle {
+        position: absolute;
+        top: 20px; 
+        left: 10px; 
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 10;
+    }
+    
+    body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    
+    body.dark-mode header {
+        background: #333;
+    }

@@ -17,4 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('tituloLogin').textContent = 'Login';
         document.getElementById('mensagemLogin').textContent = 'Escolha seu tipo de usuário na página principal primeiro.';
     }
+
+    // Correção: Ajustar o link de cadastro para incluir o tipo
+    const linkCadastro = document.querySelector('a[href="Cadastro.html"]');
+    if (linkCadastro && tipoUsuario) {
+        linkCadastro.href = `Cadastro.html?tipo=${tipoUsuario}`;
+    }
 });

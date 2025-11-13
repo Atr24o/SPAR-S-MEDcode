@@ -13,12 +13,18 @@
 
 <body>
 
+    <!-- HEADER -->
+
     <header>
         <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
-        <img src="imagens/Logo.png" alt="Imagem da logo do grupo">
-        <h1>SPAR</h1>
+        <a href="Main_page.html" id="Titulo">
+            <img src="imagens/Logo.png" alt="Imagem da logo do grupo">
+            <h1>SPAR</h1>
+        </a>
     </header>
     
+    <!-- SEÇÃO DE CONTEINER DO LOGIN -->
+
     <section class="conteiner_1">
     
         <img src="imagens/green_effect.png" alt="efeito" id="green_effect2">
@@ -29,18 +35,34 @@
             <p id="mensagemLogin">Por favor, faça seu login.</p>
             
             <label for="usuario">Usuário:</label>
+            <div class="input-container">
             <input type="text" id="usuario" placeholder="Digite seu usuário">
+            </div>
             
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" placeholder="Digite sua senha">
+            <div class="input-container">
+                <input type="password" id="senha" placeholder="Digite sua senha">
+                <button id="toggleSenha" type="button" aria-label="Alternar visibilidade da senha"><img src="imagens/olho_aberto.png" alt="olho_aberto"></button>
+            </div>
+
             
             <button id="botaoEntrar">Entrar</button>
-        
+            
+            <p id="question">Não possui uma conta ou está com problemas?</p>
+
+            <div class="ajuda">
+                <a href="Cadastro.html"><p>Cadastre-se gratuitamente</p></a>
+                <p>/</p>
+                <a href=""><p>não lembro minha senha</p></a>
+            </div>
+
         </div>
     
         <img src="imagens/green_effect.png" alt="efeito" id="green_effect1">
     
     </section>
+
+    <img src="imagens/Médico no PC.png" alt="medico" id="PC_template">
 
 </body>
 </html>
