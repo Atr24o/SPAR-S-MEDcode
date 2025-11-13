@@ -32,7 +32,6 @@ Com o SPAR, tudo isso fica no passado! ✨
 ---
 
 ## ⚙️ Tecnologias Utilizadas
-> *(Adapte conforme as tecnologias reais do seu projeto)*
 
 - 🖥️ **Front-end:** HTML / CSS / JAVA SCRIPT
 - 🧠 **Back-end:** PYTHON  
