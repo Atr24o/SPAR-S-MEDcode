@@ -168,12 +168,13 @@
     
     #PC_template{
       mask-image: linear-gradient(to right,rgb(0, 0, 0) 0% 75%, rgba(0, 0, 0, 0) 90% 100%);
-        left: 0;
-        bottom: 0;
-        position: absolute;
-        z-index: 10;
-        width: 500px;
-        height: auto;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      z-index: 10;
+      width: 500px;
+      height: auto;
+      pointer-events: none;
     }
     
     #bracos{
@@ -188,8 +189,6 @@
     #question{
         margin-bottom: 0px;
     }
-    
-    
     
     /* MODO ESCURO PARA LOGIN */
     
