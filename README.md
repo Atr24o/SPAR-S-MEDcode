@@ -15,6 +15,7 @@ Com o SPAR, tudo isso fica no passado! ✨
 
 ## 👥 Tipos de Usuário
 
+
 ### 🧑‍⚕️ Médicos
 - Acessam **todos os agendamentos** com facilidade;
 - Podem **notificar pacientes diretamente** sobre:
@@ -78,4 +79,6 @@ Sinta-se à vontade para:
 - <a href="https://github.com/Caduccus">Jeferson Lira</a>
 - <a href="https://github.com/But069">Gabriel Elias</a>
 - <a href="https://github.com/Ryancm1234">Ryan Carlos</a>
+- <a href="https://github.com/Guilherme49121">Guilherme Oliveira</a>
 > “Agendar uma consulta nunca foi tão rápido!” 💫
+![unnamed](https://github.com/user-attachments/assets/ea4fce00-589e-4ae6-a249-0d104a59578c)
