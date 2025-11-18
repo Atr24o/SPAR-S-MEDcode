@@ -1,0 +1,246 @@
+    /* VISUAL CONTEINER */
+
+    .conteiner_1{
+        border-radius: 50px;
+        padding: 20px 30px;
+        position: relative;
+        flex-direction: column;
+        margin: 20px auto;
+        background-color: rgb(206, 255, 239);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: auto;
+        width: fit-content;
+        gap: 20px;
+    }
+    
+    #tituloLogin{
+        font-family: Monark;
+        font-size: 40px;
+        margin: 0;
+    }
+    
+    #mensagemLogin{
+        background-color: rgb(206, 255, 239, 0.5);
+        border: 2xpx rgb(206, 255, 221) solid;
+        border-radius: 5px;
+    }
+    
+    .LOGIN{
+        font-family: Arial, Helvetica, sans-serif;
+        gap: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 10;
+        position: relative;
+        text-align: center;
+    }
+
+    .input-container {
+        position: relative;
+        width: 200px;
+    }
+    
+    .input-container input {
+        margin-bottom: 10px;
+        border-radius: 20px;
+        padding: 10px;
+        padding-right: 40px;
+        position: relative;
+        width: 100%;
+        border: none;
+        background: white;
+        position: relative;
+        transition: border 0.3s ease, transform 0.3s ease;
+    }
+    .input-container button {
+        position: absolute;
+        right: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        color: #666;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, font-size 0.3s ease;
+    }
+    
+    .input-container button:hover {
+        color: #333;
+    }
+    
+    .input-container button img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        object-position: center;
+        margin: 0;
+    }
+    
+    input:focus {
+        transform: scale(1.2);
+        border: 2px solid transparent;
+        border-radius: 0;
+        outline: none;
+        animation: borderGlow 2s linear infinite;
+    }
+    
+    .input-container input:focus + button {
+        transform: translateY(-50%) translateX(30px);
+        font-size: 20px;
+    }
+    
+    @keyframes borderGlow {
+        0% {
+            border-image: linear-gradient(0deg, hsla(120, 100%, 50%, 0.8), transparent, transparent, transparent) 1;
+        }
+        25% {
+            border-image: linear-gradient(90deg, hsla(120, 100%, 50%, 0.5), transparent, transparent, transparent) 1;
+        }
+        50% {
+            border-image: linear-gradient(180deg, hsla(120, 100%, 50%, 0.8), transparent, transparent, transparent) 1;
+        }
+        75% {
+            border-image: linear-gradient(270deg, hsla(120, 100%, 50%, 0.5), transparent, transparent, transparent) 1;
+        }
+        100% {
+            border-image: linear-gradient(360deg, hsla(120, 100%, 50%, 0.8), transparent, transparent, transparent) 1;
+        }
+    }
+    
+    .ajuda{
+        gap: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #botaoEntrar{
+        background: rgb(233, 255, 252);
+        border: 1px rgb(180, 244, 255) solid;
+        padding: 10px 30px;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    
+    #botaoEntrar:hover{
+        background: rgb(161, 216, 208);
+        border: 1px rgb(144, 207, 218) solid;
+    }
+    
+    #green_effect1{
+        background-color: transparent;
+        filter: opacity(0.5);
+        transform: scale(1.3);
+        position: absolute;
+        bottom: -50px;
+        right: -90px;
+        pointer-events: none;
+    }
+    
+    #green_effect2{
+        background-color: transparent;
+        filter: opacity(0.5);
+        transform: scale(1.3) scaleY(-1) scaleX(-1);
+        position: absolute;
+        top: 0px;
+        right: 90px;
+        margin-top: -50px;
+        pointer-events: none;
+    }
+    
+    body:not(.dark-mode) #green_effect1, body:not(.dark-mode) #green_effect2 {
+        filter: opacity(0.5);
+        background-color: transparent;
+    }
+    
+    #PC_template{
+      mask-image: linear-gradient(to right,rgb(0, 0, 0) 0% 75%, rgba(0, 0, 0, 0) 90% 100%);
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      z-index: 10;
+      width: 500px;
+      height: auto;
+      pointer-events: none;
+    }
+    
+    #bracos{
+        right: 0;
+        bottom: -90px;
+        position: absolute;
+        z-index: 10;
+        width: 300px;
+        height: auto;
+    }
+    
+    #question{
+        margin-bottom: 0px;
+    }
+    
+    /* MODO ESCURO PARA LOGIN */
+    
+    body.dark-mode a{
+        color: #fff;
+    }
+
+    body.dark-mode h1 {
+        color: #fff;
+    }
+    
+    body.dark-mode .conteiner_1 {
+        background-color: #333;
+    }
+    
+    body.dark-mode .conteiner_1 #green_effect1, #green_effect2{
+        background-color: #333;
+        filter: grayscale(100);
+    }
+    
+    body.dark-mode .conteiner_1 button{
+        color: #fff;
+        border: 1px solid #666;
+    }
+    
+    body.dark-mode .input-container button img{
+        filter: invert(1);
+    }
+    
+    body.dark-mode input {
+        background-color: #444;
+        color: #fff;
+        border: 1px solid #666;
+        filter: none; 
+    }
+    
+    body.dark-mode label {
+        color: #fff;
+    }
+    
+    body.dark-mode .input-container button {
+        filter: none;
+        background-color: transparent;
+        border: none;
+    }
+    
+    body.dark-mode .input-container button:hover {
+        color: #fff;
+    }
+    
+    body.dark-mode #botaoEntrar {
+        border-color:   #505050;
+        background: rgb(95, 95, 95);
+    }
+    
