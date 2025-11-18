@@ -1,4 +1,0 @@
-- [x] Editar Login.html: Envolver o input de senha em uma div .input-container e adicionar o botão de toggle com ícone dentro dela.
-- [x] Editar Css/Login_Cadastro.css: Adicionar estilos para .input-container, posicionar o botão dentro do input e adaptar ao modo escuro.
-- [x] Editar JavaScript/Login.js: Adicionar lógica de toggle para alternar type do input e ícone do botão.
-- [x] Testar: Abrir Login.html no navegador e verificar se o toggle funciona (revelar/ocultar senha ao clicar no ícone).
