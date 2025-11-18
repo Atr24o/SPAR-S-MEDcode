@@ -45,16 +45,16 @@ body.dark-mode .explanations {
     background-color: rgba(50, 50, 50, 0.5);
 }
 
-body.dark-mode .paciente, body.dark-mode .medico {
+body.dark-mode .paciente, body.dark-mode .funcionario {
     background: #333;
     color: #ffffff;
 }
 
-body.dark-mode .paciente:hover, body.dark-mode .medico:hover {
+body.dark-mode .paciente:hover, body.dark-mode .funcionario:hover {
     background-color: rgba(100, 100, 100, 0.5);
 }
 
-body.dark-mode .paciente img, body.dark-mode .medico img{
+body.dark-mode .paciente img, body.dark-mode .funcionario img{
     color-scheme: grey;
 }
 
@@ -152,6 +152,34 @@ body.dark-mode .cell img#dados {
     max-width: 100%;
 }
 
+.funcionario {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    width: 300px;
+    border-radius: 40px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s ease;
+    background-color: white;
+}
+
+.funcionario:hover {
+    background-color: rgba(255, 135, 135, 0.185);
+    box-shadow: 0px 10px 30px rgba(130, 217, 255, 0.63);
+}
+
+.funcionario img {
+    border-radius: 200px;
+    border: 2px solid black;
+    mask-image: none;
+    height: 60px;
+    width: auto;
+    max-width: 100%;
+}
+
     /* SECTION 2 */
 
 .explanations{
@@ -239,12 +267,11 @@ h2 {
    /* COD PARA OUTRAS TELAS */
 
     /* PARA CELULAR */
-    @media (max-width: 500px ){
+    @media (max-width: 390px ){
         .Entrada {
             overflow: contain;
             height: 1000px;
             width: 800px;
-            margin-top: 80px;
             background: linear-gradient(to top, rgb(206, 255, 239) 0% , rgba(255, 255, 255, 0) 100%);
         }
 
@@ -252,13 +279,11 @@ h2 {
             mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 30% , rgb(0, 0, 0) 80% 100%);
             left: 0;
             width: 100%;
-            border-radius: 30px;
+
         }
 
         .grid_espace1 {
-            margin-top: 0px;
-            gap: 10px 200px;
-            height: 615px;
+            margin-top: 500px;
         }
 
         .explanations{
@@ -266,38 +291,17 @@ h2 {
         }
 
         .paciente {
-            font-size: 20px;
-        }
-
-        .medico {
-            font-size: 20px;
-        }
-
-        .paciente, .medico {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
             width: 300px;
-            top: 60px;
-
+            border-radius: 40px;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s ease;
+            background-color: white;
         }
 
-        h2 {
-            font-size: 40px;
-            line-height: 60px;
-            margin-top: 470px;
-        }
-
-        #slogan {
-            font-size: 30px;
-        }
-        
-        .frase_paciente{
-            margin-top: 0;
-            font-size: 25px;
-        }
-
-        .frase1{
-            font-family: Comic Sans MS;
-            font-size: 35px;
-            margin-bottom: 2px;
-        }
-       
     }

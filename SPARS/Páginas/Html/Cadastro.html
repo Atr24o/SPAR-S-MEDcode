@@ -72,9 +72,35 @@
                     </div>
                 </div>
 
+                <div id="funcionarioContainer" style="display: none;">
+                    <label for="tipoFuncionario">Tipo de Funcionário:</label>
+                    <div class="input-container">
+                        <select id="tipoFuncionario" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="medico">Médico</option>
+                            <option value="secretaria">Secretária</option>
+                            <option value="enfermeiro">Enfermeiro</option>
+                        </select>
+                    </div>
+
+                    <div id="crmFuncionarioContainer" style="display: none;">
+                        <label for="crmFuncionario">CRM:</label>
+                        <div class="input-container">
+                        <input type="text" id="crmFuncionario" placeholder="Digite seu CRM" maxlength="8" pattern="\d{8}">
+                        </div>
+                    </div>
+
+                    <div id="cpfFuncionarioContainer" style="display: none;">
+                        <label for="cpfFuncionario">CPF:</label>
+                        <div class="input-container">
+                        <input type="text" id="cpfFuncionario" placeholder="Digite seu CPF" maxlength="11" pattern="\d{11}">
+                        </div>
+                    </div>
+                </div>
+
                 <button type="submit" id="botaoEntrar">Entrar</button>
             </form>
-            
+
             <a href="Login.html"><p>Já tenho uma conta</p></a>
 
         </div>

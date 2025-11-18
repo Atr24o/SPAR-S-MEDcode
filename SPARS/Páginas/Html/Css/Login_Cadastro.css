@@ -179,7 +179,7 @@
     
     #bracos{
         right: 0;
-        bottom: -40px;
+        bottom: -90px;
         position: absolute;
         z-index: 10;
         width: 300px;
@@ -193,6 +193,10 @@
     /* MODO ESCURO PARA LOGIN */
     
     body.dark-mode a{
+        color: #fff;
+    }
+
+    body.dark-mode h1 {
         color: #fff;
     }
     

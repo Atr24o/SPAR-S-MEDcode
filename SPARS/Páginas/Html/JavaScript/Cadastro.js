@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('tituloLogin').textContent = 'Cadastro do Médico';
         document.getElementById('mensagemLogin').textContent = 'Bem-vindo, médico! Insira seus dados para criar sua conta.';
         document.getElementById('crmContainer').style.display = 'block';
+    } else if (tipoUsuario === 'funcionario') {
+        document.getElementById('tituloLogin').textContent = 'Cadastro do Funcionário';
+        document.getElementById('mensagemLogin').textContent = 'Bem-vindo, funcionário! Insira seus dados para criar sua conta.';
+        document.getElementById('funcionarioContainer').style.display = 'block';
     } else {
         document.getElementById('tituloLogin').textContent = 'Cadastro';
         document.getElementById('mensagemLogin').textContent = 'Por favor, insira seus dados para criar sua conta.';
@@ -75,6 +79,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Aplicar formatação automática ao campo CRM do funcionário
+    const crmFuncionarioInput = document.getElementById('crmFuncionario');
+    if (crmFuncionarioInput) {
+        crmFuncionarioInput.addEventListener('input', function() {
+            this.value = formatCRM(this.value);
+        });
+    }
+
+    // Aplicar formatação automática ao campo CPF do funcionário
+    const cpfFuncionarioInput = document.getElementById('cpfFuncionario');
+    if (cpfFuncionarioInput) {
+        cpfFuncionarioInput.addEventListener('input', function() {
+            this.value = formatCPF(this.value);
+        });
+    }
+
+    // Lógica para mostrar campos específicos do funcionário
+    const tipoFuncionarioSelect = document.getElementById('tipoFuncionario');
+    if (tipoFuncionarioSelect) {
+        tipoFuncionarioSelect.addEventListener('change', function() {
+            const tipoFuncionario = this.value;
+            document.getElementById('crmFuncionarioContainer').style.display = 'none';
+            document.getElementById('cpfFuncionarioContainer').style.display = 'none';
+
+            if (tipoFuncionario === 'medico' || tipoFuncionario === 'enfermeiro') {
+                document.getElementById('crmFuncionarioContainer').style.display = 'block';
+            } else if (tipoFuncionario === 'secretaria') {
+                document.getElementById('cpfFuncionarioContainer').style.display = 'block';
+            }
+        });
+    }
+
     // Validação e submissão do formulário
     const form = document.getElementById('cadastroForm');
     form.addEventListener('submit', function(event) {
@@ -86,6 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const senhaC = document.getElementById('senha_C').value;
         const crm = document.getElementById('crm').value;
         const cpf = document.getElementById('cpf').value;
+        const tipoFuncionario = document.getElementById('tipoFuncionario').value;
+        const crmFuncionario = document.getElementById('crmFuncionario').value;
+        const cpfFuncionario = document.getElementById('cpfFuncionario').value;
 
         // Validações básicas
         if (!email || !usuario || !senha || !senhaC) {
@@ -121,6 +160,37 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!/^\d{11}$/.test(cpfNumerico)) {
                 alert('O CPF deve conter exatamente 11 dígitos numéricos.');
                 return;
+            }
+        }
+
+        if (tipoUsuario === 'funcionario') {
+            if (!tipoFuncionario) {
+                alert('Por favor, selecione o tipo de funcionário.');
+                return;
+            }
+
+            if (tipoFuncionario === 'medico' || tipoFuncionario === 'enfermeiro') {
+                if (!crmFuncionario) {
+                    alert('Por favor, preencha o campo CRM.');
+                    return;
+                }
+                // Validação do CRM sem formatação (remover pontos e traços)
+                const crmFuncionarioNumerico = crmFuncionario.replace(/\D/g, '');
+                if (!/^\d{8}$/.test(crmFuncionarioNumerico)) {
+                    alert('O CRM deve conter exatamente 8 dígitos numéricos.');
+                    return;
+                }
+            } else if (tipoFuncionario === 'secretaria') {
+                if (!cpfFuncionario) {
+                    alert('Por favor, preencha o campo CPF.');
+                    return;
+                }
+                // Validação do CPF sem formatação (remover pontos e traços)
+                const cpfFuncionarioNumerico = cpfFuncionario.replace(/\D/g, '');
+                if (!/^\d{11}$/.test(cpfFuncionarioNumerico)) {
+                    alert('O CPF deve conter exatamente 11 dígitos numéricos.');
+                    return;
+                }
             }
         }
 
