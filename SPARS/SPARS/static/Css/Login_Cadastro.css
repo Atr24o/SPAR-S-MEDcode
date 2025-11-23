@@ -1,0 +1,83 @@
+/* AJUSTES ESPECÍFICOS PARA O TOGGLE DA SENHA */
+.input-container {
+    position: relative;
+    width: 200px;
+    margin-bottom: 10px; /* Adicionado para espaçamento consistente */
+}
+
+.input-container input {
+    margin-bottom: 0; /* Removido para evitar duplo espaçamento */
+    border-radius: 20px;
+    padding: 10px 40px 10px 15px; /* Padding direito aumentado */
+    width: 100%;
+    border: none;
+    background: white;
+    transition: border 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+    font-size: 14px; /* Adicionado para melhor legibilidade */
+}
+
+.input-container button {
+    position: absolute;
+    right: 8px; /* Ajustado para melhor posicionamento */
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    padding: 4px; /* Reduzido padding */
+    width: 28px; /* Largura fixa */
+    height: 28px; /* Altura fixa */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%; /* Botão circular */
+}
+
+.input-container button:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.1); /* Fundo sutil no hover */
+}
+
+.input-container button:active {
+    transform: translateY(-50%) scale(0.95); /* Efeito de clique */
+}
+
+.input-container button img {
+    width: 18px; /* Tamanho consistente */
+    height: 18px;
+    object-fit: contain;
+    pointer-events: none; /* Impede que a imagem interfira no clique */
+}
+
+/* Garantir que o foco no input não afete o botão */
+.input-container input:focus {
+    transform: scale(1.05);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    outline: none;
+    animation: borderGlow 2s linear infinite;
+    padding-right: 40px; /* Mantém espaço consistente */
+}
+
+/* Modo escuro - ajustes específicos */
+body.dark-mode .input-container button {
+    color: #ccc;
+    background: transparent;
+}
+
+body.dark-mode .input-container button:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .input-container button img {
+    filter: invert(0.8); /* Ajuste mais suave */
+}
+
+body.dark-mode .input-container button:hover img {
+    filter: invert(1); /* Totalmente branco no hover */
+}
