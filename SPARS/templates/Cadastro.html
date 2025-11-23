@@ -17,96 +17,82 @@
 
     <header>
         <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
-        <a href="/templates/Main_page.html" id="Titulo">
+        <a href="/" id="Titulo">
             <img src="/static/imagens/Logo.png" alt="Imagem da logo do grupo">
             <h1>SPAR</h1>
         </a>
     </header>
-    
+
     <!-- SEÇÃO DE CONTEINER DO LOGIN -->
 
     <section class="conteiner_1">
-    
+
         <img src="/static/imagens/green_effect.png" alt="efeito" id="green_effect2">
-    
+
         <div class="LOGIN">
-        
+
             <h2 id="tituloLogin">Cadastro</h2>
             <p id="mensagemLogin">Por favor, insira seus dados para criar sua conta.</p>
 
-            <form id="cadastroForm">
+            <form id="cadastroForm" action="/user" method="POST">  <!-- CORRIGIDO -->
+
+                <!-- TIPO DE USUÁRIO -->
+                
+                <label for="Nome">Nome Completo:</label>  <!-- CORRIGIDO -->
+                <div class="input-container">
+                <input type="text" id="Nome" name="Nome" placeholder="Digite seu nome completo" required>  <!-- CORRIGIDO -->
+                </div>
+
                 <label for="Email">Email:</label>
                 <div class="input-container">
-                <input type="email" id="Email" placeholder="Digite seu Email" required>
+                <input type="email" id="Email" name="Email" placeholder="Digite seu Email" required>  <!-- CORRIGIDO -->
                 </div>
 
-                <label for="usuario">Usuário:</label>
+                <label for="Senha">Senha:</label>
                 <div class="input-container">
-                <input type="text" id="usuario" placeholder="Digite seu usuário" required>
-                </div>
-
-
-                <label for="senha">Senha:</label>
-                <div class="input-container">
-                    <input type="password" id="senha" placeholder="Digite sua senha" required>
+                    <input type="password" id="Senha" name="Senha" placeholder="Digite sua senha" required>
                     <button id="toggleSenha" type="button" aria-label="Alternar visibilidade da senha"><img src="/static/imagens/olho_aberto.png" alt="olho_aberto"></button>
                 </div>
 
-                <label for="senha_C">Confirme sua senha:</label>
+                <label for="Confirmar_Senha">Confirmar Senha:</label>
                 <div class="input-container">
-                    <input type="password" id="senha_C" placeholder="Confirme sua senha" required>
-                    <button id="toggleSenha_C" type="button" aria-label="Alternar visibilidade da senha"><img src="/static/imagens/olho_aberto.png" alt="olho_aberto"></button>
+                    <input type="password" id="Confirmar_Senha" name="Confirmar_Senha" placeholder="Confirme sua senha" required>
+                    <button id="toggleConfirmarSenha" type="button" aria-label="Alternar visibilidade da confirmação de senha"><img src="/static/imagens/olho_aberto.png" alt="olho_aberto"></button>
                 </div>
 
+                <label for="Tipo_Usuario">Tipo de Usuário:</label>
+                <div class="input-container">
+                    <select id="Tipo_Usuario" name="Tipo_Usuario" required>  <!-- CORRIGIDO -->
+                        <option value="">Selecione o tipo</option>
+                        <option value="Paciente">Paciente</option>
+                        <option value="Médico">Médico</option>
+                        <option value="Secretária">Secretária</option>
+                    </select>
+                </div>
+                <!-- CRM (APENAS PARA MÉDICOS) -->
                 <div id="crmContainer" style="display: none;">
-                    <label for="crm">CRM:</label>
+                    <label for="CRM">CRM:</label>
                     <div class="input-container">
-                    <input type="text" id="crm" placeholder="Digite seu CRM" maxlength="8" pattern="\d{8}">
+                    <input type="text" id="CRM" name="CRM" placeholder="Digite seu CRM">
                     </div>
                 </div>
 
-                <div id="cpfContainer" style="display: none;">
-                    <label for="cpf">CPF:</label>
-                    <div class="input-container">
-                    <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="11" pattern="\d{11}">
-                    </div>
+                <!-- CPF (PARA TODOS) -->
+                <label for="CPF">CPF:</label>
+                <div class="input-container">
+                    <input type="text" id="CPF" name="CPF" placeholder="Digite seu CPF" required>
                 </div>
 
-                <div id="funcionarioContainer" style="display: none;">
-                    <label for="tipoFuncionario">Tipo de Funcionário:</label>
-                    <div class="input-container">
-                        <select id="tipoFuncionario" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="medico">Médico</option>
-                            <option value="secretaria">Secretária</option>
-                            <option value="enfermeiro">Enfermeiro</option>
-                        </select>
-                    </div>
-
-                    <div id="crmFuncionarioContainer" style="display: none;">
-                        <label for="crmFuncionario">CRM:</label>
-                        <div class="input-container">
-                        <input type="text" id="crmFuncionario" placeholder="Digite seu CRM" maxlength="8" pattern="\d{8}">
-                        </div>
-                    </div>
-
-                    <div id="cpfFuncionarioContainer" style="display: none;">
-                        <label for="cpfFuncionario">CPF:</label>
-                        <div class="input-container">
-                        <input type="text" id="cpfFuncionario" placeholder="Digite seu CPF" maxlength="11" pattern="\d{11}">
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" id="botaoEntrar">Entrar</button>
+                
+                <button type="submit" id="botaoCadastrar">Cadastrar</button>  <!-- CORRIGIDO -->
             </form>
 
-            <a href="/templates/Login.html"><p>Já tenho uma conta</p></a>
+            <a href="/login"><p>Já tenho uma conta</p></a>
 
         </div>
-    
+        
         <img src="/static/imagens/green_effect.png" alt="efeito" id="green_effect1">
-    
+
     </section>
 
     <img src="/static/imagens/medico-com-os-bracos-cruzados.png" alt="medico-com-os-bracos-cruzados" id="bracos">

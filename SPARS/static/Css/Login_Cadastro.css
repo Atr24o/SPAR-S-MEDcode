@@ -139,6 +139,29 @@
         background: rgb(161, 216, 208);
         border: 1px rgb(144, 207, 218) solid;
     }
+
+    #botaoCadastrar{
+        background: rgb(233, 255, 252);
+        border: 1px rgb(180, 244, 255) solid;
+        padding: 10px 30px;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+#Tipo_Usuario{
+    margin-bottom: 10px;
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    width: 250px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    background-image: url('/static/imagens/down-arrow.svg');
+}
+
+        /* EFEITOS VISUAIS */
     
     #green_effect1{
         background-color: transparent;
@@ -195,10 +218,6 @@
     body.dark-mode a{
         color: #fff;
     }
-
-    body.dark-mode h1 {
-        color: #fff;
-    }
     
     body.dark-mode .conteiner_1 {
         background-color: #333;
@@ -243,4 +262,33 @@
         border-color:   #505050;
         background: rgb(95, 95, 95);
     }
+    
+    body.dark-mode #botaoCadastrar {
+        border-color:   #505050;
+        background: rgb(95, 95, 95);
+    }
+
+body.dark-mode #Tipo_Usuario {
+    background: rgb(150, 150, 150);
+    border-color: #707070;
+    color: #fff;
+    cursor: pointer;
+}
+
+body.dark-mode #Tipo_Usuario::-ms-expand {
+    display: none;
+}
+
+body.dark-mode #Tipo_Usuario {
+    background-image: url('/static/imagens/down-arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+}
+
+body.dark-mode #Tipo_Usuario option {
+    background-color: rgb(150, 150, 150);
+    color: #fff;
+}
+
     
