@@ -49,34 +49,74 @@
                 emptyState.remove();
             }
             
+            // Data atual formatada
+            const dataAtual = new Date();
+            const dataFormatada = dataAtual.toLocaleDateString('pt-BR');
+            const dataISO = dataAtual.toISOString().split('T')[0];
+            
             // Criar novo item
             const novoItem = document.createElement('div');
             novoItem.className = 'grid-item';
+            novoItem.setAttribute('data-consulta-id', contador);
             novoItem.innerHTML = `
                 <div class="item-header">
                     <h3>Consulta ${contador}</h3>
-                    <span class="item-date">${new Date().toLocaleDateString()}</span>
+                    <span class="item-status">Agendada</span>
                 </div>
                 <div class="item-content">
                     <p><strong>Paciente:</strong> Paciente ${contador}</p>
                     <p><strong>Médico:</strong> Dr. Silva</p>
                     <p><strong>Horário:</strong> 14:00</p>
-                    <p><strong>Status:</strong> Agendada</p>
+                    <p><strong>Data:</strong> <span class="consulta-date">${dataFormatada}</span></p>
+                    <p><strong>Status:</strong> <span class="status-text">Agendada</span></p>
                 </div>
                 <div class="item-details" style="display: none;">
                     <div class="detail-section">
                         <h4>Detalhes da Consulta</h4>
                         <p><strong>Sintomas:</strong> Dor de cabeça, febre</p>
-                        <p><strong>Medicação:</strong> Paracetamol</p>
                         <p><strong>Observações:</strong> Repouso recomendado</p>
                         <p><strong>Próxima consulta:</strong> 15 dias</p>
+                    </div>
+                    
+                    <!-- SECTION DO CALENDÁRIO COMO INPUT DATE -->
+                    <section class="calendar-section" style="display: none;">
+                        <div class="calendar-input-container">
+                            <label for="dateInput-${contador}">Escolha a nova data:</label>
+                            <div class="input-wrapper">
+                                <input type="date" 
+                                       id="dateInput-${contador}" 
+                                       class="date-input"
+                                       value="${dataISO}"
+                                       min="${new Date().toISOString().split('T')[0]}">
+                                <span class="calendar-icon">📅</span>
+                            </div>
+                            <div class="calendar-actions">
+                                <button class="btn btn-cancel" onclick="fecharCalendario(this)">Cancelar</button>
+                                <button class="btn btn-confirm" onclick="confirmarData(this)">Confirmar Data</button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- BOTÕES NO CANTO INFERIOR DIREITO -->
+                    <div class="button-container">
+                        <button class="btn btn-cancel" onclick="cancelarConsulta(this)">
+                            <span class="btn-icon">✕</span>
+                            Cancelar Consulta
+                        </button>
+                        <button class="btn btn-reschedule" onclick="reagendarConsulta(this)">
+                            <span class="btn-icon">↻</span>
+                            Reagendar Consulta
+                        </button>
                     </div>
                 </div>
             `;
             
             // Adicionar evento de clique
-            novoItem.addEventListener('click', function() {
-                toggleItemDetails(this);
+            novoItem.addEventListener('click', function(e) {
+                // Impedir que o clique nos botões feche o item
+                if (!e.target.closest('.btn') && !e.target.closest('.calendar-section')) {
+                    toggleItemDetails(this);
+                }
             });
             
             // Adicionar ao grid
@@ -101,8 +141,143 @@
             if (!isExpanded) {
                 details.style.display = 'block';
                 item.classList.add('expanded');
+                
+                // Scroll para o item expandido
+                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
+
+        // FUNÇÃO PARA CANCELAR CONSULTA
+        function cancelarConsulta(btn) {
+            const item = btn.closest('.grid-item');
+            const consultaNum = item.querySelector('h3').textContent;
+            
+            if (confirm(`Tem certeza que deseja cancelar a ${consultaNum}?`)) {
+                item.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    item.remove();
+                    
+                    // Verificar se não há mais itens e mostrar empty state
+                    const grid = document.getElementById('gridContainer');
+                    if (grid.children.length === 0) {
+                        grid.innerHTML = `
+                            <div class="empty-state" id="emptyState">
+                                <span>📋</span>
+                                <p>Sem consultas marcadas</p>
+                            </div>
+                        `;
+                    }
+                }, 300);
+            }
+            event.stopPropagation();
+        }
+
+        // FUNÇÃO PARA REAGENDAR CONSULTA
+        function reagendarConsulta(btn) {
+            const item = btn.closest('.grid-item');
+            const calendarSection = item.querySelector('.calendar-section');
+            const buttonContainer = item.querySelector('.button-container');
+            const dateInput = item.querySelector('.date-input');
+            const currentDate = item.querySelector('.consulta-date').textContent;
+            
+            // Converter data atual para ISO (para preencher o input)
+            const [dia, mes, ano] = currentDate.split('/');
+            const dataISO = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+            dateInput.value = dataISO;
+            
+            // Configurar data mínima como hoje
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+            
+            // Esconder botões e mostrar calendário
+            buttonContainer.style.display = 'none';
+            calendarSection.style.display = 'block';
+            
+            // Focar no input de data
+            setTimeout(() => {
+                dateInput.focus();
+            }, 100);
+            
+            // Scroll para o calendário
+            calendarSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            event.stopPropagation();
+        }
+
+        function fecharCalendario(btn) {
+            const item = btn.closest('.grid-item');
+            const calendarSection = item.querySelector('.calendar-section');
+            const buttonContainer = item.querySelector('.button-container');
+            
+            // Esconder calendário e mostrar botões
+            calendarSection.style.display = 'none';
+            buttonContainer.style.display = 'flex';
+        }
+
+        function confirmarData(btn) {
+            const item = btn.closest('.grid-item');
+            const dateInput = item.querySelector('.date-input');
+            const calendarSection = item.querySelector('.calendar-section');
+            const buttonContainer = item.querySelector('.button-container');
+            
+            if (!dateInput.value) {
+                alert('Por favor, selecione uma data para reagendar.');
+                return;
+            }
+            
+            // Formatar data para exibição
+            const selectedDate = new Date(dateInput.value);
+            const formattedDate = selectedDate.toLocaleDateString('pt-BR');
+            
+            // Atualizar a data no item (tanto no conteúdo principal quanto no header)
+            const dateElement = item.querySelector('.consulta-date');
+            dateElement.textContent = formattedDate;
+            
+            // Atualizar o status para "Reagendada"
+            const statusElement = item.querySelector('.status-text');
+            statusElement.textContent = 'Reagendada';
+            statusElement.className = 'status-text status-reagendada';
+            
+            // Atualizar também o status no header
+            const headerStatus = item.querySelector('.item-status');
+            headerStatus.textContent = 'Reagendada';
+            headerStatus.className = 'item-status status-reagendada';
+            
+            // Esconder calendário e mostrar botões
+            calendarSection.style.display = 'none';
+            buttonContainer.style.display = 'flex';
+            
+            alert(`Consulta reagendada para ${formattedDate}`);
+        }
+
+        // Melhorar experiência do input date
+        document.addEventListener('DOMContentLoaded', function() {
+            const supportsDateInput = (function() {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'date');
+                const notADateValue = 'not-a-date';
+                input.setAttribute('value', notADateValue);
+                return input.value !== notADateValue;
+            })();
+            
+            if (!supportsDateInput) {
+                document.querySelectorAll('.date-input').forEach(input => {
+                    input.type = 'text';
+                    input.placeholder = 'DD/MM/AAAA';
+                    
+                    input.addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length > 2) {
+                            value = value.substring(0, 2) + '/' + value.substring(2);
+                        }
+                        if (value.length > 5) {
+                            value = value.substring(0, 5) + '/' + value.substring(5, 9);
+                        }
+                        e.target.value = value;
+                    });
+                });
+            }
+        });
     </script>
 </body>
 </html>
