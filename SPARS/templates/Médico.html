@@ -112,8 +112,45 @@
             border-top: 1px solid #e0e0e0;
         }
 
-        /* Status das consultas
-        .status-pendente {
+        /* BOTÕES DE AÇÃO PARA MÉDICO */
+        .button-container {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .btn-remarcar-consulta {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-remarcar-consulta:hover {
+            background-color: #138496;
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* STATUS ADICIONAIS */
+        .status-reagendada {
             background: #ffc107;
             color: #333;
             padding: 4px 12px;
@@ -122,27 +159,23 @@
             font-weight: 600;
         }
 
-        .status-confirmada {
-            background: #28a745;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+        /* MODAL DE REAGENDAMENTO */
+        .reagendamento-modal {
+            max-width: 400px;
         }
 
-        .status-rejeitada {
-            background: #dc3545;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+        .reagendamento-form {
+            padding: 20px;
         }
 
-        .prioridade-baixa { color: #28a745; font-weight: 600; }
-        .prioridade-media { color: #007bff; font-weight: 600; }
-        .prioridade-alta { color: #dc3545; font-weight: 600; }
+        .reagendamento-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -158,7 +191,7 @@
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
-        } */
+        }
 
         /* Dark mode para o popup */
         body.dark-mode .popup-content {
@@ -204,66 +237,106 @@
         <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
         <a href="/" id="Titulo">
             <img src="/static/imagens/Logo.png" alt="Imagem da logo do grupo">
-            <h1>SPAR - Paciente</h1>
+            <h1>SPAR - Médico</h1>
         </a>
+
         <button class="user"><img src="/static/imagens/Paciente.avif" alt=""></button>
     </header>
 
     <section id="Info">
-        <h2>Minhas Consultas</h2>
+        <h2>Consultas no Sistema</h2>
     </section>
 
     <section class="container">
-        
-
         <div class="grid-container" id="gridContainer">
             <div class="empty-state" id="emptyState">
                 <span>📋</span>
                 <p>Nenhuma consulta solicitada</p>
             </div>
+            <!-- Itens serão adicionados aqui -->
         </div>
     </section>
 
     <!-- POPUP PARA SOLICITAR CONSULTA -->
     <div id="addConsultaPopup" class="popup-overlay">
-        <!-- ... (mantenha o conteúdo existente) ... -->
-    </div>
-
-    <!-- MODAL DE REAGENDAMENTO PARA PACIENTE -->
-    <div id="reagendamentoModal" class="modal-overlay">
-        <div class="modal-content reagendamento-modal">
-            <div class="modal-header">
-                <h3>Reagendar Consulta</h3>
-                <span class="modal-close" onclick="fecharReagendamentoModal()">&times;</span>
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>Solicitar Nova Consulta</h3>
+                <span class="popup-close" onclick="fecharPopup()">&times;</span>
             </div>
-            <div class="reagendamento-form">
+            
+            <form id="consultaForm" class="popup-form">
                 <div class="form-group">
-                    <label for="novaData">Nova Data:</label>
-                    <input type="date" id="novaData" class="date-input" min="">
+                    <label for="nome">Nome completo:</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite o nome completo">
                 </div>
+                
                 <div class="form-group">
-                    <label for="motivoReagendamento">Motivo do Reagendamento:</label>
-                    <textarea id="motivoReagendamento" placeholder="Digite o motivo do reagendamento..." rows="3"></textarea>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00" maxlength="14">
                 </div>
-                <div class="reagendamento-actions">
-                    <button class="btn btn-cancel" onclick="fecharReagendamentoModal()">Cancelar</button>
-                    <button class="btn btn-confirm" onclick="confirmarReagendamentoPaciente()">Confirmar Reagendamento</button>
+                
+                <div class="form-group">
+                    <label for="idade">Idade:</label>
+                    <input type="number" id="idade" name="idade" required placeholder="Digite a idade" min="0" max="120">
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="alergias">Alergias:</label>
+                    <textarea id="alergias" name="alergias" placeholder="Liste as alergias conhecidas (se houver)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="motivo">Motivo do agendamento:</label>
+                    <select id="motivo" name="motivo" required>
+                        <option value="">Selecione o motivo</option>
+                        <option value="Estou doente">Estou doente</option>
+                        <option value="Exame de sangue">Exame de sangue</option>
+                        <option value="Check up de rotina">Check up de rotina</option>
+                        <option value="Dor crônica">Dor crônica</option>
+                        <option value="Acompanhamento">Acompanhamento</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel" onclick="fecharPopup()">Cancelar</button>
+                    <button type="submit" class="btn btn-confirm">Enviar Solicitação</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- MODAL DE CANCELAMENTO PARA PACIENTE -->
-    <div id="cancelamentoModal" class="modal-overlay">
-        <div class="modal-content reagendamento-modal">
-            <div class="modal-header">
-                <h3>Cancelar Consulta</h3>
-                <span class="modal-close" onclick="fecharCancelamentoModal()">&times;</span>
+    <!-- MODAL DE REAGENDAMENTO PARA MÉDICO -->
+    <div id="reagendamentoMedicoModal" class="popup-overlay">
+        <div class="popup-content reagendamento-modal">
+            <div class="popup-header">
+                <h3>Remarcar Consulta</h3>
+                <span class="popup-close" onclick="fecharReagendamentoMedicoModal()">&times;</span>
             </div>
             <div class="reagendamento-form">
                 <div class="form-group">
-                    <label for="motivoCancelamento">Motivo do Cancelamento:</label>
-                    <textarea id="motivoCancelamento" placeholder="Digite o motivo do cancelamento..." rows="3"></textarea>
+                    <label for="novaDataMedico">Nova Data:</label>
+                    <input type="date" id="novaDataMedico" class="date-input" min="">
+                </div>
+                <div class="form-group">
+                    <label for="novoHorarioMedico">Novo Horário:</label>
+                    <select id="novoHorarioMedico" class="date-input">
+                        <option value="">Selecione o horário</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:30">09:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:45">16:45</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="motivoReagendamentoMedico">Motivo do Reagendamento:</label>
+                    <textarea id="motivoReagendamentoMedico" placeholder="Digite o motivo do reagendamento..." rows="3"></textarea>
+                </div>
+                <div class="reagendamento-actions">
+                    <button class="btn btn-cancel" onclick="fecharReagendamentoMedicoModal()">Cancelar</button>
+                    <button class="btn btn-confirm" onclick="confirmarReagendamentoMedico()">Confirmar Reagendamento</button>
                 </div>
             </div>
         </div>
@@ -278,15 +351,88 @@
             carregarMinhasConsultas();
         });
 
-        // ... (mantenha todas as funções existentes: abrirPopup, fecharPopup, etc.) ...
+        // FUNÇÕES DO POPUP
+        function abrirPopup() {
+            const popup = document.getElementById('addConsultaPopup');
+            popup.style.display = 'flex';
+            document.getElementById('nome').focus();
+        }
 
-        // CARREGAR CONSULTAS DO PACIENTE
+        function fecharPopup() {
+            const popup = document.getElementById('addConsultaPopup');
+            popup.style.display = 'none';
+            document.getElementById('consultaForm').reset();
+        }
+
+        // MÁSCARA PARA CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 3) {
+                value = value.substring(0, 3) + '.' + value.substring(3);
+            }
+            if (value.length > 7) {
+                value = value.substring(0, 7) + '.' + value.substring(7);
+            }
+            if (value.length > 11) {
+                value = value.substring(0, 11) + '-' + value.substring(11, 13);
+            }
+            
+            e.target.value = value;
+        });
+
+        // SUBMISSÃO DO FORMULÁRIO
+        document.getElementById('consultaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const dados = {
+                id: 'consulta_' + Date.now(),
+                nome: formData.get('nome'),
+                cpf: formData.get('cpf'),
+                idade: formData.get('idade'),
+                alergias: formData.get('alergias'),
+                motivo: formData.get('motivo'),
+                status: 'pendente',
+                dataSolicitacao: new Date().toISOString(),
+                tipo: 'solicitacao_paciente'
+            };
+            
+            // Validar campos obrigatórios
+            if (!dados.nome || !dados.cpf || !dados.idade || !dados.motivo) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            // Enviar para secretária (salvar no localStorage)
+            enviarParaSecretaria(dados);
+            fecharPopup();
+        });
+
+        // ENVIAR SOLICITAÇÃO PARA SECRETÁRIA
+        function enviarParaSecretaria(dados) {
+            let solicitacoesPendentes = JSON.parse(localStorage.getItem('solicitacoesPendentes')) || [];
+            solicitacoesPendentes.push(dados);
+            localStorage.setItem('solicitacoesPendentes', JSON.stringify(solicitacoesPendentes));
+            
+            // Também salva nas consultas do paciente
+            let minhasConsultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
+            minhasConsultas.push(dados);
+            localStorage.setItem('minhasConsultas', JSON.stringify(minhasConsultas));
+            
+            // Recarregar a lista
+            carregarMinhasConsultas();
+            
+            alert('Solicitação enviada com sucesso! A secretária irá analisar e você receberá uma resposta em breve.');
+        }
+
+        // CARREGAR CONSULTAS DO MÉDICO
         function carregarMinhasConsultas() {
             const grid = document.getElementById('gridContainer');
             const emptyState = document.getElementById('emptyState');
             let consultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
             
-            // Limpar grid
+            // Limpar grid (exceto empty state)
             const items = grid.querySelectorAll('.grid-item');
             items.forEach(item => item.remove());
             
@@ -307,7 +453,7 @@
             });
         }
 
-        // CRIAR ITEM DE CONSULTA PARA PACIENTE
+        // CRIAR ITEM DE CONSULTA PARA MÉDICO
         function criarItemConsulta(consulta) {
             const item = document.createElement('div');
             item.className = 'grid-item';
@@ -329,12 +475,12 @@
                     <p><strong>Horário:</strong> ${consulta.horario || 'A definir'}</p>
                 `;
                 
-                // BOTÕES PARA CONSULTAS CONFIRMADAS
+                // BOTÃO REMARCAR PARA CONSULTAS CONFIRMADAS
                 botoesHtml = `
                     <div class="button-container">
-                        <button class="btn btn-reagendar-consulta" onclick="solicitarReagendamento('${consulta.id}')">
+                        <button class="btn-remarcar-consulta" onclick="solicitarReagendamentoMedico('${consulta.id}')">
                             <span class="btn-icon">↻</span>
-                            Reagendar Consulta
+                            Remarcar Consulta
                         </button>
                     </div>
                 `;
@@ -342,10 +488,6 @@
                 statusClass = 'status-rejeitada';
                 statusText = 'Rejeitada';
                 detalhesHtml = `<p><strong>Motivo da rejeição:</strong> ${consulta.motivoRejeicao || 'Não especificado'}</p>`;
-            } else if (consulta.status === 'cancelada') {
-                statusClass = 'status-cancelada';
-                statusText = 'Cancelada';
-                detalhesHtml = `<p><strong>Motivo do cancelamento:</strong> ${consulta.motivoCancelamento || 'Não especificado'}</p>`;
             } else if (consulta.status === 'reagendada') {
                 statusClass = 'status-reagendada';
                 statusText = 'Reagendada';
@@ -356,60 +498,52 @@
                     <p><strong>Horário:</strong> ${consulta.horario || 'A definir'}</p>
                     <p><strong>Motivo do Reagendamento:</strong> ${consulta.motivoReagendamento || 'Não especificado'}</p>
                 `;
-            }
-            
-            // Histórico de alterações
-            let historicoHtml = '';
-            if (consulta.historico && consulta.historico.length > 0) {
-                historicoHtml = `
-                    <div class="historico-alteracoes">
-                        <h5>Histórico de Alterações</h5>
-                        ${consulta.historico.map(alteracao => `
-                            <div class="historico-item">
-                                <span class="historico-data">${new Date(alteracao.data).toLocaleString('pt-BR')}</span> - 
-                                <span class="historico-acao">${alteracao.acao}</span>
-                                ${alteracao.motivo ? `<br><span class="historico-motivo">Motivo: ${alteracao.motivo}</span>` : ''}
-                            </div>
-                        `).join('')}
+                
+                // BOTÃO REMARCAR TAMBÉM PARA CONSULTAS REAGENDADAS
+                botoesHtml = `
+                    <div class="button-container">
+                        <button class="btn-remarcar-consulta" onclick="solicitarReagendamentoMedico('${consulta.id}')">
+                            <span class="btn-icon">↻</span>
+                            Remarcar Consulta
+                        </button>
                     </div>
                 `;
             }
             
             item.innerHTML = `
                 <div class="item-header">
-                    <h3>Consulta ${consulta.numero || consulta.id?.slice(-6) || 'N/A'}</h3>
+                    <h3>Consulta ${consulta.id.slice(-6)}</h3>
                     <span class="${statusClass}">${statusText}</span>
                 </div>
                 <div class="item-content">
-                    <p><strong>Paciente:</strong> <span>${consulta.nome}</span></p>
-                    <p><strong>CPF:</strong> <span>${consulta.cpf}</span></p>
-                    <p><strong>Idade:</strong> <span>${consulta.idade} anos</span></p>
-                    <p><strong>Motivo:</strong> <span>${consulta.motivo}</span></p>
-                    <p><strong>Data Solicitação:</strong> <span>${new Date(consulta.dataSolicitacao).toLocaleDateString('pt-BR')}</span></p>
+                    <p><strong>Paciente:</strong> ${consulta.nome}</p>
+                    <p><strong>CPF:</strong> ${consulta.cpf}</p>
+                    <p><strong>Idade:</strong> ${consulta.idade} anos</p>
+                    <p><strong>Motivo:</strong> ${consulta.motivo}</p>
+                    <p><strong>Data Solicitação:</strong> ${new Date(consulta.dataSolicitacao).toLocaleDateString('pt-BR')}</p>
                     ${prioridadeHtml}
                     ${detalhesHtml}
                 </div>
                 <div class="item-details" style="display: none;">
                     <div class="detail-section">
                         <h4>Detalhes Completos</h4>
-                        <p><strong>Alergias:</strong> <span>${consulta.alergias || 'Nenhuma informada'}</span></p>
+                        <p><strong>Alergias:</strong> ${consulta.alergias || 'Nenhuma informada'}</p>
                         <p><strong>Situação:</strong> 
                             <span>${consulta.status === 'pendente' ? 'Aguardando análise da secretária' : 
                                    consulta.status === 'confirmada' ? 'Consulta confirmada! Aguarde a data marcada.' : 
                                    consulta.status === 'rejeitada' ? 'Consulta não pode ser atendida no momento.' :
-                                   consulta.status === 'cancelada' ? 'Consulta cancelada.' :
-                                   'Consulta reagendada.'}</span>
+                                   consulta.status === 'reagendada' ? 'Consulta reagendada.' :
+                                   'Consulta cancelada.'}</span>
                         </p>
-                        ${consulta.dataConfirmacao ? `<p><strong>Data da Confirmação:</strong> <span>${new Date(consulta.dataConfirmacao).toLocaleDateString('pt-BR')}</span></p>` : ''}
+                        ${consulta.dataConfirmacao ? `<p><strong>Data da Confirmação:</strong> ${new Date(consulta.dataConfirmacao).toLocaleDateString('pt-BR')}</p>` : ''}
                     </div>
-                    ${historicoHtml}
                     ${botoesHtml}
                 </div>
             `;
             
             // Adicionar evento de clique para expandir
             item.addEventListener('click', function(e) {
-                if (!e.target.closest('.btn')) {
+                if (!e.target.closest('.btn-remarcar-consulta')) {
                     toggleItemDetails(this);
                 }
             });
@@ -417,8 +551,8 @@
             return item;
         }
 
-        // SOLICITAR REAGENDAMENTO (PACIENTE)
-        function solicitarReagendamento(consultaId) {
+        // SOLICITAR REAGENDAMENTO (MÉDICO)
+        function solicitarReagendamentoMedico(consultaId) {
             const consultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
             consultaSelecionada = consultas.find(c => c.id === consultaId);
             
@@ -427,27 +561,36 @@
                 return;
             }
             
-            if (consultaSelecionada.status !== 'confirmada') {
-                alert('Apenas consultas confirmadas podem ser reagendadas!');
+            if (consultaSelecionada.status !== 'confirmada' && consultaSelecionada.status !== 'reagendada') {
+                alert('Apenas consultas confirmadas ou reagendadas podem ser remarcadas!');
                 return;
             }
             
             // Configurar data mínima como amanhã
             const amanha = new Date();
             amanha.setDate(amanha.getDate() + 1);
-            document.getElementById('novaData').min = amanha.toISOString().split('T')[0];
+            document.getElementById('novaDataMedico').min = amanha.toISOString().split('T')[0];
             
-            document.getElementById('reagendamentoModal').style.display = 'flex';
+            // Preencher dados atuais se existirem
+            if (consultaSelecionada.dataConsulta) {
+                const [dia, mes, ano] = consultaSelecionada.dataConsulta.split('/');
+                document.getElementById('novaDataMedico').value = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+            }
+            
+            document.getElementById('novoHorarioMedico').value = consultaSelecionada.horario || '';
+            
+            document.getElementById('reagendamentoMedicoModal').style.display = 'flex';
             event.stopPropagation();
         }
 
-        // CONFIRMAR REAGENDAMENTO (PACIENTE)
-        function confirmarReagendamentoPaciente() {
-            const novaData = document.getElementById('novaData').value;
-            const motivo = document.getElementById('motivoReagendamento').value;
+        // CONFIRMAR REAGENDAMENTO (MÉDICO)
+        function confirmarReagendamentoMedico() {
+            const novaData = document.getElementById('novaDataMedico').value;
+            const novoHorario = document.getElementById('novoHorarioMedico').value;
+            const motivo = document.getElementById('motivoReagendamentoMedico').value;
             
-            if (!novaData) {
-                alert('Por favor, selecione uma nova data!');
+            if (!novaData || !novoHorario) {
+                alert('Por favor, preencha data e horário!');
                 return;
             }
             
@@ -456,26 +599,18 @@
                 return;
             }
             
-            // Atualizar consulta do paciente
+            // Atualizar consultas do médico
             let minhasConsultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
             minhasConsultas = minhasConsultas.map(consulta => {
                 if (consulta.id === consultaSelecionada.id) {
-                    const historico = consulta.historico || [];
-                    historico.push({
-                        data: new Date().toISOString(),
-                        acao: 'Reagendamento solicitado pelo paciente',
-                        motivo: motivo,
-                        usuario: 'Paciente'
-                    });
-                    
                     return {
                         ...consulta,
                         status: 'reagendada',
                         dataOriginal: consulta.dataConsulta,
-                        novaDataConsulta: new Date(novaData).toLocaleDateString('pt-BR'),
+                        dataConsulta: new Date(novaData).toLocaleDateString('pt-BR'),
+                        horario: novoHorario,
                         motivoReagendamento: motivo,
-                        dataReagendamento: new Date().toISOString(),
-                        historico: historico
+                        dataReagendamento: new Date().toISOString()
                     };
                 }
                 return consulta;
@@ -486,133 +621,40 @@
             let consultasConfirmadas = JSON.parse(localStorage.getItem('consultasConfirmadas')) || [];
             consultasConfirmadas = consultasConfirmadas.map(consulta => {
                 if (consulta.id === consultaSelecionada.id) {
-                    const historico = consulta.historico || [];
-                    historico.push({
-                        data: new Date().toISOString(),
-                        acao: 'Reagendamento solicitado pelo paciente',
-                        motivo: motivo,
-                        usuario: 'Paciente'
-                    });
-                    
                     return {
                         ...consulta,
                         status: 'reagendada',
                         dataOriginal: consulta.dataConsulta,
-                        novaDataConsulta: new Date(novaData).toLocaleDateString('pt-BR'),
+                        dataConsulta: new Date(novaData).toLocaleDateString('pt-BR'),
+                        horario: novoHorario,
                         motivoReagendamento: motivo,
-                        dataReagendamento: new Date().toISOString(),
-                        historico: historico
+                        dataReagendamento: new Date().toISOString()
                     };
                 }
                 return consulta;
             });
             localStorage.setItem('consultasConfirmadas', JSON.stringify(consultasConfirmadas));
             
-            fecharReagendamentoModal();
+            fecharReagendamentoMedicoModal();
             carregarMinhasConsultas();
-            alert('Solicitação de reagendamento enviada! A secretária será notificada.');
+            alert('Consulta remarcada com sucesso! A secretária será notificada.');
         }
 
-        // SOLICITAR CANCELAMENTO (PACIENTE)
-        function solicitarCancelamento(consultaId) {
-            const consultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
-            consultaSelecionada = consultas.find(c => c.id === consultaId);
-            
-            if (!consultaSelecionada) {
-                alert('Consulta não encontrada!');
-                return;
-            }
-            
-            if (consultaSelecionada.status !== 'confirmada') {
-                alert('Apenas consultas confirmadas podem ser canceladas!');
-                return;
-            }
-            
-            document.getElementById('cancelamentoModal').style.display = 'flex';
-            event.stopPropagation();
-        }
-
-        // CONFIRMAR CANCELAMENTO (PACIENTE)
-        function confirmarCancelamentoPaciente() {
-            const motivo = document.getElementById('motivoCancelamento').value;
-            
-            if (!motivo) {
-                alert('Por favor, informe o motivo do cancelamento!');
-                return;
-            }
-            
-            // Atualizar consulta do paciente
-            let minhasConsultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
-            minhasConsultas = minhasConsultas.map(consulta => {
-                if (consulta.id === consultaSelecionada.id) {
-                    const historico = consulta.historico || [];
-                    historico.push({
-                        data: new Date().toISOString(),
-                        acao: 'Cancelamento solicitado pelo paciente',
-                        motivo: motivo,
-                        usuario: 'Paciente'
-                    });
-                    
-                    return {
-                        ...consulta,
-                        status: 'cancelada',
-                        motivoCancelamento: motivo,
-                        dataCancelamento: new Date().toISOString(),
-                        historico: historico
-                    };
-                }
-                return consulta;
-            });
-            localStorage.setItem('minhasConsultas', JSON.stringify(minhasConsultas));
-            
-            // Atualizar consultas confirmadas (remover da lista da secretária)
-            let consultasConfirmadas = JSON.parse(localStorage.getItem('consultasConfirmadas')) || [];
-            consultasConfirmadas = consultasConfirmadas.map(consulta => {
-                if (consulta.id === consultaSelecionada.id) {
-                    const historico = consulta.historico || [];
-                    historico.push({
-                        data: new Date().toISOString(),
-                        acao: 'Cancelamento solicitado pelo paciente',
-                        motivo: motivo,
-                        usuario: 'Paciente'
-                    });
-                    
-                    return {
-                        ...consulta,
-                        status: 'cancelada',
-                        motivoCancelamento: motivo,
-                        dataCancelamento: new Date().toISOString(),
-                        historico: historico
-                    };
-                }
-                return consulta;
-            });
-            localStorage.setItem('consultasConfirmadas', JSON.stringify(consultasConfirmadas));
-            
-            fecharCancelamentoModal();
-            carregarMinhasConsultas();
-            alert('Consulta cancelada com sucesso!');
-        }
-
-        // FUNÇÕES AUXILIARES MODAIS
-        function fecharReagendamentoModal() {
-            document.getElementById('reagendamentoModal').style.display = 'none';
-            document.getElementById('novaData').value = '';
-            document.getElementById('motivoReagendamento').value = '';
+        // FECHAR MODAL DE REAGENDAMENTO MÉDICO
+        function fecharReagendamentoMedicoModal() {
+            document.getElementById('reagendamentoMedicoModal').style.display = 'none';
+            document.getElementById('novaDataMedico').value = '';
+            document.getElementById('novoHorarioMedico').value = '';
+            document.getElementById('motivoReagendamentoMedico').value = '';
             consultaSelecionada = null;
         }
 
-        function fecharCancelamentoModal() {
-            document.getElementById('cancelamentoModal').style.display = 'none';
-            document.getElementById('motivoCancelamento').value = '';
-            consultaSelecionada = null;
-        }
-
-        // TOGGLE DETALHES (mantenha a função existente)
+        // TOGGLE DETALHES
         function toggleItemDetails(item) {
             const details = item.querySelector('.item-details');
             const isExpanded = details.style.display === 'block';
             
+            // Fechar todos os outros itens expandidos
             document.querySelectorAll('.item-details').forEach(detail => {
                 detail.style.display = 'none';
             });
@@ -620,6 +662,7 @@
                 gridItem.classList.remove('expanded');
             });
             
+            // Alternar o item clicado
             if (!isExpanded) {
                 details.style.display = 'block';
                 item.classList.add('expanded');
@@ -627,7 +670,55 @@
             }
         }
 
-        // ... (mantenha as outras funções existentes) ...
+        // CANCELAR SOLICITAÇÃO
+        function cancelarSolicitacao(consultaId) {
+            if (confirm('Tem certeza que deseja cancelar esta solicitação?')) {
+                // Remover das solicitações pendentes da secretária
+                let solicitacoesPendentes = JSON.parse(localStorage.getItem('solicitacoesPendentes')) || [];
+                solicitacoesPendentes = solicitacoesPendentes.filter(c => c.id !== consultaId);
+                localStorage.setItem('solicitacoesPendentes', JSON.stringify(solicitacoesPendentes));
+                
+                // Remover das minhas consultas
+                let minhasConsultas = JSON.parse(localStorage.getItem('minhasConsultas')) || [];
+                minhasConsultas = minhasConsultas.filter(c => c.id !== consultaId);
+                localStorage.setItem('minhasConsultas', JSON.stringify(minhasConsultas));
+                
+                // Recarregar lista
+                carregarMinhasConsultas();
+                
+                alert('Solicitação cancelada com sucesso!');
+            }
+            event.stopPropagation();
+        }
+
+        // FECHAR POPUP AO CLICAR FORA
+        document.getElementById('addConsultaPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharPopup();
+            }
+        });
+
+        document.getElementById('reagendamentoMedicoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharReagendamentoMedicoModal();
+            }
+        });
+
+        // FECHAR POPUP COM ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fecharPopup();
+                fecharReagendamentoMedicoModal();
+            }
+        });
+
+        // SIMULAR ATUALIZAÇÕES (para demonstração)
+        function verificarAtualizacoes() {
+            carregarMinhasConsultas();
+        }
+
+        // Verificar atualizações a cada 5 segundos
+        setInterval(verificarAtualizacoes, 5000);
     </script>
 </body>
 </html>
