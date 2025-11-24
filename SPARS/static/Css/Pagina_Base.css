@@ -5,11 +5,20 @@
     box-sizing: border-box;
 }
 
+/* CONFIGURAÇÃO PARA ROLAGEM DO SITE INTEIRO */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ← Impede rolagem horizontal */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5f5f5;
     line-height: 1.6;
-    overflow-x: hidden;
+    min-height: 1000vh; 
+    overflow-y: auto; 
 }
 
 /* HEADER - SEGUINDO O CÓDIGO FORNECIDO */
@@ -85,7 +94,8 @@ h1 {
 /* CONTAINER PRINCIPAL */
 .container {
     padding: 20px;
-    position: fixed;
+    max-height: 80vh;
+    position: relative;
     top: 320px;
     left: 50%;
     transform: translateX(-50%);
