@@ -26,15 +26,15 @@
     
     /* HEADER */
     
-    #Titulo{
-        transform: translateX(-50);
-        right: 50%;
-        text-decoration: none;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        color: rgb(0, 0, 0);
-    }
+#Titulo{
+    transform: translateX(-50%);
+    right: 50%;
+    text-decoration: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0);
+}
     
     header {
         justify-content: center;
@@ -90,4 +90,8 @@
     
     body.dark-mode header {
         background: #333;
+    }
+
+    body.dark-mode #Titulo {
+        color: #ffffff;
     }
