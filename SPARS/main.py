@@ -217,7 +217,7 @@ async def login_user(request: Request):
         if not usuario or not senha:
             raise HTTPException(status_code=400, detail="Usuário e senha são obrigatórios")
 
-        # Resto do código continua igual...
+        # Buscar usuário no banco
         response = supabase.table("User").select("*").eq("Email", usuario).execute()
         
         if not response.data:
@@ -228,6 +228,22 @@ async def login_user(request: Request):
         if user["Senha"] != senha:
             raise HTTPException(status_code=401, detail="Usuário ou senha incorretos")
 
+        # 🔥 NOVO: Determinar a página de redirecionamento baseado no tipo de usuário
+        tipo_usuario = user["Tipo_Usuario"].lower()
+        pagina_redirecionamento = ""
+        
+        if "médico" in tipo_usuario or "medico" in tipo_usuario:
+            pagina_redirecionamento = "Médico.html"
+        elif "secretaria" in tipo_usuario or "secretária" in tipo_usuario:
+            pagina_redirecionamento = "Secretária.html"
+        elif "paciente" in tipo_usuario:
+            pagina_redirecionamento = "Paciente.html"
+        else:
+            # Fallback para página genérica
+            pagina_redirecionamento = "Main_page.html"
+
+        print(f"🎯 Usuário {user['Nome']} é do tipo: {tipo_usuario} -> Redirecionando para: {pagina_redirecionamento}")
+
         return {
             "status": "ok", 
             "message": "Login realizado com sucesso", 
@@ -236,7 +252,8 @@ async def login_user(request: Request):
                 "nome": user["Nome"],
                 "email": user["Email"],
                 "tipo_usuario": user["Tipo_Usuario"]
-            }
+            },
+            "redirect_to": pagina_redirecionamento  # 🔥 NOVO CAMPO
         }
         
     except HTTPException:
@@ -247,6 +264,35 @@ async def login_user(request: Request):
             status_code=500,
             content={"error": str(e)}
         )
+
+# 🔥 NOVAS ROTAS PARA AS PÁGINAS ESPECÍFICAS
+
+@app.get("/Paciente", response_class=HTMLResponse)
+async def paciente_page(request: Request):
+    try:
+        return templates.TemplateResponse("Paciente.html", {"request": request})
+    except Exception as e:
+        error_msg = f"Erro ao carregar página do paciente: {str(e)}"
+        print(f"❌ {error_msg}")
+        return HTMLResponse(content=f"<h1>Erro</h1><p>{error_msg}</p>", status_code=500)
+
+@app.get("/Médico", response_class=HTMLResponse)
+async def medico_page(request: Request):
+    try:
+        return templates.TemplateResponse("Médico.html", {"request": request})
+    except Exception as e:
+        error_msg = f"Erro ao carregar página do médico: {str(e)}"
+        print(f"❌ {error_msg}")
+        return HTMLResponse(content=f"<h1>Erro</h1><p>{error_msg}</p>", status_code=500)
+
+@app.get("/Secretária", response_class=HTMLResponse)
+async def secretaria_page(request: Request):
+    try:
+        return templates.TemplateResponse("Secretária.html", {"request": request})
+    except Exception as e:
+        error_msg = f"Erro ao carregar página da secretária: {str(e)}"
+        print(f"❌ {error_msg}")
+        return HTMLResponse(content=f"<h1>Erro</h1><p>{error_msg}</p>", status_code=500)
 
 # Rota de saúde da API
 @app.get("/health")
