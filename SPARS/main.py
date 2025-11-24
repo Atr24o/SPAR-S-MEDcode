@@ -3,11 +3,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from supabase import create_client, Client
-from pydantic import BaseModel
-import os
-from dotenv import load_dotenv
-from fastapi.middleware.cors import CORSMiddleware
-import traceback
+from pydantic import Base
 
 #intale as dependências necessárias no terminal:
 
@@ -325,4 +321,5 @@ def debug_users():
 # ----------------------------------------------------
 
 #para fechar o server, abre um novo terminal e use:
+
 #  taskkill /f /im python.exe   
