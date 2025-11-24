@@ -1,115 +1,111 @@
-// ===== LOGIN.JS COMPLETO =====
-console.log('🚀 Script de login carregado NO FINAL');
+    // ===== LOGIN.JS - VERSÃO FINAL FUNCIONAL =====
+    console.log('🚀 Script de login carregado - VERSÃO FINAL');
 
-// 1. TOGGLE DA SENHA
-const toggleBtn = document.getElementById('togglesenha');
-const senhaInput = document.getElementById('senha');
+    // TOGGLE DA SENHA
+    const toggleBtn = document.getElementById('togglesenha');
+    const senhaInput = document.getElementById('senha');
 
-if (toggleBtn && senhaInput) {
-    console.log('✅ Toggle configurado!');
-    
-    toggleBtn.addEventListener('click', function() {
-        if (senhaInput.type === 'password') {
-            senhaInput.type = 'text';
-            this.innerHTML = '<img src="/static/imagens/olho_fechado.png" alt="ocultar senha">';
-        } else {
-            senhaInput.type = 'password';
-            this.innerHTML = '<img src="/static/imagens/olho_aberto.png" alt="mostrar senha">';
-        }
-    });
-}
+    if (toggleBtn && senhaInput) {
+        toggleBtn.addEventListener('click', function() {
+            console.log('👁️ Botão de visualizar senha clicado');
+            if (senhaInput.type === 'password') {
+                senhaInput.type = 'text';
+                this.innerHTML = '<img src="/static/imagens/olho_fechado.png" alt="ocultar senha">';
+                console.log('🔓 Senha visível');
+            } else {
+                senhaInput.type = 'password';
+                this.innerHTML = '<img src="/static/imagens/olho_aberto.png" alt="mostrar senha">';
+                console.log('🔒 Senha oculta');
+            }
+        });
+        console.log('✅ Toggle de senha configurado');
+    }
 
-// 2. FORMULÁRIO DE LOGIN - VERSÃO CORRIGIDA
-const formLogin = document.getElementById('loginForm');
-if (formLogin) {
-    formLogin.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const usuario = document.getElementById('usuario').value.trim();
-        const senha = document.getElementById('senha').value;
-        
-        console.log('🔍 Dados para envio:', { usuario, senha });
-        
-        if (!usuario || !senha) {
-            alert('Por favor, preencha usuário e senha!');
-            return;
-        }
-        
-        const botao = document.getElementById('botaoEntrar');
-        const botaoOriginal = botao.textContent;
-        botao.textContent = 'Entrando...';
-        botao.disabled = true;
-        
-        try {
-            console.log('📤 Enviando dados para login...');
+    // FORMULÁRIO DE LOGIN
+    const formLogin = document.getElementById('loginForm');
+    if (formLogin) {
+        formLogin.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log('📝 Formulário submetido');
             
-            // MÉTODO 1: URLSearchParams (mais compatível)
-            const params = new URLSearchParams();
-            params.append('usuario', usuario);
-            params.append('senha', senha);
+            const usuario = document.getElementById('usuario').value.trim();
+            const senha = document.getElementById('senha').value;
             
-            console.log('📦 Parâmetros:', params.toString());
+            console.log('🔐 Dados:', { usuario, senha: senha ? '***' : 'vazia' });
             
-            const resposta = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: params
-            });
-            
-            console.log('📥 Status:', resposta.status);
-            
-            const respostaTexto = await resposta.text();
-            console.log('📄 Resposta completa:', respostaTexto);
-            
-            try {
-                const dados = JSON.parse(respostaTexto);
-                
-                if (resposta.ok) {
-                    console.log('✅ Login bem-sucedido:', dados);
-                    if (dados.status === 'ok') {
-                    alert(`Bem-vindo, ${dados.user.nome}!`);
-                    // Redirecionar baseado no tipo de usuário
-                    const tipoUsuarioRaw = dados.user.tipo_usuario;
-                    console.log('Tipo usuário do backend:', tipoUsuarioRaw);
-
-                    // Normaliza tipo usuario para evitar diferenças de acentos/case
-                    const tipoUsuario = tipoUsuarioRaw.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-                    console.log('Tipo usuário normalizado:', tipoUsuario);
-
-                    if (tipoUsuario === 'medico') {
-                        console.log('Redirecionando para /Medico');
-                        window.location.href = '/Medico';
-                    } else if (tipoUsuario === 'secretaria') {
-                        console.log('Redirecionando para /Secretaria');
-                        window.location.href = '/Secretaria';
-                    } else if (tipoUsuario === 'paciente') {
-                        console.log('Redirecionando para /Paciente');
-                        window.location.href = '/Paciente';
-                    } else {
-                        console.warn('Tipo usuário desconhecido, redirecionando para /');
-                        window.location.href = '/';
-                    }
-                } else {
-                    alert('Login falhou: ' + (dados.detail || 'Credenciais inválidas'));
-                }
-                } else {
-                    console.error('❌ Erro do servidor:', dados);
-                    alert('Erro: ' + (dados.detail || dados.error || 'Erro desconhecido'));
-                }
-            } catch (parseError) {
-                console.error('❌ Erro ao parsear resposta:', parseError);
-                alert('Erro na resposta do servidor');
+            if (!usuario || !senha) {
+                alert('Por favor, preencha usuário e senha!');
+                return;
             }
             
-        } catch (erro) {
-            console.error('💥 Erro de conexão:', erro);
-            alert('Erro de conexão. Verifique se o servidor está rodando.');
-        } finally {
-            botao.textContent = botaoOriginal;
-            botao.disabled = false;
-        }
-    });
-}
+            const botao = document.getElementById('botaoEntrar');
+            const botaoOriginal = botao.textContent;
+            botao.textContent = 'Entrando...';
+            botao.disabled = true;
+            
+            try {
+                console.log('📤 Enviando requisição para /login...');
+                
+                const formData = new FormData();
+                formData.append('usuario', usuario);
+                formData.append('senha', senha);
+                
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                console.log('📥 Status:', response.status);
+                
+                const result = await response.json();
+                console.log('📨 Resposta completa:', result);
+                
+                if (response.ok && result.status === 'ok') {
+                    console.log('🎉 LOGIN BEM-SUCEDIDO!');
+                    console.log('👤 Dados do usuário:', result.user);
+                    
+                    // 🔥🔥🔥 REDIRECIONAMENTO CORRETO 🔥🔥🔥
+                    const userType = result.user.tipo_usuario.toLowerCase();
+                    console.log('🔤 Tipo de usuário:', userType);
+                    
+                    let redirectUrl = '/';
+                    
+                    if (userType.includes('medico')) {
+                        redirectUrl = '/Medico';
+                        console.log('🎯 Redirecionando para Médico');
+                    } 
+                    else if (userType.includes('secretaria') || userType.includes('secretária')) {
+                        redirectUrl = '/Secretária';
+                        console.log('🎯 Redirecionando para Secretária');
+                    } 
+                    else if (userType.includes('paciente')) {
+                        redirectUrl = '/Paciente';
+                        console.log('🎯 Redirecionando para Paciente');
+                    }
+                    
+                    console.log('🚀 EXECUTANDO REDIRECIONAMENTO PARA:', redirectUrl);
+                    
+                    // 🔥 REDIRECIONAMENTO FINAL
+                    setTimeout(() => {
+                        console.log('📍 Navegando para:', redirectUrl);
+                        window.location.href = redirectUrl;
+                    }, 100);
+                    
+                } else {
+                    console.error('❌ Login falhou:', result);
+                    alert('❌ ' + (result.detail || result.error || 'Login falhou'));
+                }
+                
+            } catch (error) {
+                console.error('💥 Erro:', error);
+                alert('❌ Erro de conexão');
+            } finally {
+                botao.textContent = botaoOriginal;
+                botao.disabled = false;
+                console.log('🔚 Processo de login finalizado');
+            }
+        });
+        console.log('✅ Formulário de login configurado');
+    } else {
+        console.error('❌ Formulário de login não encontrado!');
+    }
