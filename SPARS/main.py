@@ -3,7 +3,11 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from supabase import create_client, Client
-from pydantic import Base
+from pydantic import BaseModel
+import os
+from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
+import traceback
 
 #intale as dependências necessárias no terminal:
 
@@ -14,6 +18,7 @@ from pydantic import Base
 # pip install jinja2
 # pip install uvicorn 
 # pip install python-multipart
+# python -m pip install fastapi dotenv supabase pydantic jinja2 uvicorn python-multipart
 
 #caso nao funcione o ex:"pip install supabase", tente:
 # python -m pip install {nome da dependencia}
@@ -321,5 +326,4 @@ def debug_users():
 # ----------------------------------------------------
 
 #para fechar o server, abre um novo terminal e use:
-
 #  taskkill /f /im python.exe   
