@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body
+    const body = document.body;
 
     // Verificar se o modo escuro está salvo no localStorage
     if (localStorage.getItem('darkMode') === 'enabled') {
@@ -20,4 +20,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
