@@ -47,6 +47,87 @@ O SPAR é o elo que conecta **quem cuida da saúde** com **quem precisa de cuida
 
 ---
 
+# SPARS - Sistema Próprio de Agendamento Rápido
+
+Sistema de agendamento médico desenvolvido com FastAPI, Supabase e frontend moderno.
+
+## 🚀 Instalação e Configuração
+
+### Pré-requisitos
+- Python 3.8+
+- Conta no [Supabase](https://supabase.com)
+
+### 1. Clone e prepare o ambiente
+```bash
+# Baixe e descompacte o repositório
+# Abra a pasta SPARS no VSCode
+# Abra um terminal no VSCode
+```
+
+### 2. Instale as dependências
+Execute no terminal (uma por vez):
+```bash
+pip install fastapi
+pip install python-dotenv
+pip install supabase
+pip install pydantic
+pip install jinja2
+pip install uvicorn
+```
+
+**Caso encontre erros, use:**
+```bash
+python -m pip install [nome_da_dependencia]
+```
+
+
+### 3. Execute o servidor
+Abra um **novo terminal** e execute:
+```bash
+uvicorn main:app --reload
+```
+ou
+```bash
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 4. Acesse a aplicação
+Abra um **novo terminal** e execute:
+```bash
+python -m webbrowser "http://127.0.0.1:8000"
+```
+
+Ou acesse manualmente: http://localhost:8000
+
+## 📋 Funcionalidades
+- ✅ Cadastro de usuários (Pacientes e Médicos)
+- ✅ Sistema de login
+- ✅ Interface responsiva
+- ✅ Integração com Supabase
+- ✅ API REST completa
+
+## 🛑 Parar o servidor
+No terminal onde o servidor está rodando:
+```bash
+Ctrl + C
+```
+Ou force o fechamento:
+```bash
+taskkill /f /im python.exe
+```
+
+## 🏗️ Estrutura do Projeto
+```
+SPARS/
+├── main.py              # Servidor FastAPI
+├── templates/           # Arquivos HTML
+├── static/             # CSS, JS e imagens
+└── .env               # Variáveis de ambiente
+```
+
+---
+
+
 ## 📸 Demonstração
 
 | Tela de Login | Painel do Paciente | Painel do Médico |
